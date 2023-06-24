@@ -1,0 +1,55 @@
+<html>
+<head>
+<title>main.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #808080;}
+.s3 { color: #6a8759;}
+.s4 { color: #6897bb;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+main.py</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s1">cv2</span>
+<span class="s0">import </span><span class="s1">numpy </span><span class="s0">as </span><span class="s1">np</span>
+<span class="s0">import </span><span class="s1">face_recognition</span>
+
+<span class="s2">#import images</span>
+<span class="s1">imgbill = face_recognition.load_image_file(</span><span class="s3">'image/jeff1.jpeg'</span><span class="s1">)</span>
+<span class="s1">imgbill = cv2.cvtColor(imgbill</span><span class="s0">,</span><span class="s1">cv2.COLOR_BGR2RGB)</span>
+<span class="s1">imgtest = face_recognition.load_image_file(</span><span class="s3">'image/bill2.jpeg'</span><span class="s1">)</span>
+<span class="s1">imgtest = cv2.cvtColor(imgtest</span><span class="s0">,</span><span class="s1">cv2.COLOR_BGR2RGB)</span>
+
+<span class="s2">#detect face</span>
+<span class="s1">faceLoc = face_recognition.face_locations(imgbill)[</span><span class="s4">0</span><span class="s1">]</span>
+<span class="s1">encodBill = face_recognition.face_encodings(imgbill)[</span><span class="s4">0</span><span class="s1">]</span>
+<span class="s1">cv2.rectangle(imgbill</span><span class="s0">,</span><span class="s1">(faceLoc[</span><span class="s4">3</span><span class="s1">]</span><span class="s0">,</span><span class="s1">faceLoc[</span><span class="s4">0</span><span class="s1">])</span><span class="s0">,</span><span class="s1">(faceLoc[</span><span class="s4">1</span><span class="s1">]</span><span class="s0">,</span><span class="s1">faceLoc[</span><span class="s4">2</span><span class="s1">])</span><span class="s0">,</span><span class="s1">(</span><span class="s4">255</span><span class="s0">,</span><span class="s4">0</span><span class="s0">,</span><span class="s4">255</span><span class="s1">)</span><span class="s0">,</span><span class="s4">2</span><span class="s1">)</span>
+
+<span class="s2">#image encoding</span>
+<span class="s1">faceLocTest = face_recognition.face_locations(imgtest)[</span><span class="s4">0</span><span class="s1">]</span>
+<span class="s1">encodTest = face_recognition.face_encodings(imgtest)[</span><span class="s4">0</span><span class="s1">]</span>
+<span class="s1">cv2.rectangle(imgtest</span><span class="s0">,</span><span class="s1">(faceLocTest[</span><span class="s4">3</span><span class="s1">]</span><span class="s0">,</span><span class="s1">faceLocTest[</span><span class="s4">0</span><span class="s1">])</span><span class="s0">,</span><span class="s1">(faceLocTest[</span><span class="s4">1</span><span class="s1">]</span><span class="s0">,</span><span class="s1">faceLocTest[</span><span class="s4">2</span><span class="s1">])</span><span class="s0">,</span><span class="s1">(</span><span class="s4">255</span><span class="s0">,</span><span class="s4">0</span><span class="s0">,</span><span class="s4">255</span><span class="s1">)</span><span class="s0">,</span><span class="s4">2</span><span class="s1">)</span>
+
+<span class="s1">results = face_recognition.compare_faces([encodBill]</span><span class="s0">,</span><span class="s1">encodTest)</span>
+<span class="s1">print(results)</span>
+
+<span class="s1">print(faceLoc)</span>
+
+<span class="s1">cv2.imshow(</span><span class="s3">'Bill Gates'</span><span class="s0">,</span><span class="s1">imgbill)</span>
+<span class="s1">cv2.imshow(</span><span class="s3">'Bill Gates Test'</span><span class="s0">,</span><span class="s1">imgtest)</span>
+<span class="s1">cv2.waitKey(</span><span class="s4">0</span><span class="s1">)</span>
+
+<span class="s2">#Message box</span>
+<span class="s0">import </span><span class="s1">tkinter </span><span class="s0">as </span><span class="s1">tk</span>
+<span class="s0">from </span><span class="s1">tkinter </span><span class="s0">import </span><span class="s1">messagebox</span>
+<span class="s1">tk.messagebox.showinfo(</span><span class="s3">&quot;Result&quot;</span><span class="s0">, </span><span class="s1">results)</span>
+
+</pre>
+</body>
+</html>
